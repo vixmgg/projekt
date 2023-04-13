@@ -1,0 +1,31 @@
+﻿@*@page "/KalkulatorKomponent"*@
+
+<style>
+    * {
+        background-color: @bckReal;
+    }
+</style>
+<div class="row-bck">
+    <div class="col-md-1">
+        <button @onclick="backgroundColor" class="btn btn-info">Background</button>
+    </div>
+</div>
+
+@code {
+    bool bckColor = true;
+    public string bckReal;
+    public void backgroundColor()
+    {
+        bckColor = !bckColor;
+        if (bckColor == false)
+        {
+             bckReal = "black";
+
+        }
+        else
+        {
+             bckReal = "white";
+        }
+
+    }
+}

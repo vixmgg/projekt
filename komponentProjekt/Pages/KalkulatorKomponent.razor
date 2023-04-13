@@ -1,0 +1,150 @@
+﻿@*@page "/KalkulatorKomponent"*@
+
+
+<hr />
+<body>
+    <div>
+        <div class="row">
+            <div class="col-md-3">
+                <p>First Number</p>
+            </div>
+            <div class="col-md-4">
+                <input placeholder="Enter First Number" @bind="@num1" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <p>Second Number</p>
+            </div>
+            <div class="col-md-4">
+                <input placeholder="Enter Second Number" @bind="@num2" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <p>Result</p>
+            </div>
+            <div class="col-md-4">
+            
+                <input placeholder="Input number" @bind="@finalresult" onblur="this.readOnly=true;" onfocus="this.readOnly=false;">
+            </div>
+        </div>
+         <br />
+        <div class="row1">
+            <div class="col-md-1">
+                <button @onclick="AddNumbers" class="btn btn-light">+</button>
+            </div>
+            <div class="col-md-1">
+                <button @onclick="SubtractNumbers" class="btn btn-primary">−</button>
+            </div>
+            <div class="col-md-1">
+                <button @onclick="MultiplyNumbers" class="btn btn-success ">X</button>
+            </div>
+            <div class="col-md-1">
+                <button @onclick="DivideNumbers" class="btn btn-info">/</button>
+            </div>
+        
+        </div>
+        <div class="row2">
+            <div class="col-md-1">
+                <button @onclick="SquareRootNumber" class="btn btn-info">√</button>
+            </div>
+            <div class="col-md-1">
+                <button @onclick="NegativeNumber" class="btn btn-info">N</button>
+            </div>
+            <div class="col-md-1">
+                <button @onclick="CleanNumbers" class="btn btn-info">C</button>
+            </div>
+        </div>
+    
+    </div>
+</body>
+<style>
+    .row1{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    }
+    
+    .row2{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    margin-top:10px;
+    }
+
+    .row {
+        height: 100px; /*set height*/
+        border: 2px solid blue;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 1px;
+        padding: 10px;
+    }
+    
+</style>
+@code {
+    public string num1;
+    public string num2;
+    public string finalresult;
+
+    public void AddNumbers()
+    {
+        finalresult = (Convert.ToDouble(num1) + Convert.ToDouble(num2)).ToString();
+    }
+    public void SubtractNumbers()
+    {
+        finalresult = (Convert.ToDouble(num1) - Convert.ToDouble(num2)).ToString();
+    }
+    public void MultiplyNumbers()
+    {
+        finalresult = (Convert.ToDouble(num1) * Convert.ToDouble(num2)).ToString();
+    }
+    public void DivideNumbers()
+    {
+        if (Convert.ToDouble(num2) != 0)
+        {
+            finalresult = (Convert.ToDouble(num1) / Convert.ToDouble(num2)).ToString();
+        }
+        else
+        {
+            finalresult = "Cannot Divide by Zero";
+        }
+    }
+    void SquareRootNumber()
+    {
+        try
+        {
+            double finalresultDouble = Convert.ToDouble(finalresult);
+            double finalresultStringSqrt = Math.Sqrt(finalresultDouble);
+            finalresult = finalresultStringSqrt.ToString();
+        }
+        catch (ArgumentNullException e)
+        {
+            throw new ArgumentNullException("Null", e);
+        }
+
+    }
+    void NegativeNumber()
+    {
+        try
+        {
+            double finalresultDouble = Convert.ToDouble(finalresult);
+            double finalresultDoubleSqrt = Convert.ToDouble(finalresultDouble) * -1;
+            finalresult = finalresultDoubleSqrt.ToString();
+        }
+        catch (ArgumentNullException e)
+        {
+            throw new ArgumentNullException("Null", e);
+        }
+
+    }
+    void CleanNumbers()
+    {
+        num1 = "";
+        num2 = "";
+        finalresult = "";
+    }
+}

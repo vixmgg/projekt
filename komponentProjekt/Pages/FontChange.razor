@@ -1,0 +1,32 @@
+﻿<style>
+    * {
+        font-family: @fontFamily, @fontReal;
+    }
+</style>
+<div class="row-bck">
+    <div class="col-md-1">
+        <button @onclick="fontChange" class="btn btn-info">fontChange</button>
+    </div>
+</div>
+
+@code {
+    bool fontCurrently = true;
+    string fontReal;
+    string fontFamily;
+    void fontChange()
+    {
+        fontCurrently = !fontCurrently;
+        if (fontCurrently == false)
+        {
+            fontFamily = "Serif";
+            fontReal = "Times New Roman";
+
+        }
+        else
+        {
+            fontFamily = "Monospace";
+            fontReal = "Lucida Console";
+        }
+
+    }
+}
